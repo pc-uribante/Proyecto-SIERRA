@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @page { size: letter; margin: 0; }
+        * { box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            font-size: 11px;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            width: 21.59cm;
+            min-height: 27.94cm;
+        }
+
+        /* Imagen de fondo con toda la hoja membretada */
+        .fondo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        /* Contenido encima del fondo, en el espacio blanco central */
+        .contenido {
+            position: relative;
+            z-index: 10;
+            /* Ajusta los márgenes para que el contenido quede en la zona blanca */
+            padding: 6.5cm 2.5cm 4cm 2.5cm;
+        }
+
+        .titulo-doc {
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #d35400;
+            margin: 0 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #d35400;
+        }
+
+        .resumen {
+            background-color: #fdf2e3;
+            padding: 10px 14px;
+            border-left: 4px solid #d35400;
+            margin: 15px 0;
+            border-radius: 3px;
+        }
+
+        .resumen p { margin: 3px 0; font-size: 11px; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background-color: rgba(255, 255, 255, 0.92);
+        }
+
+        th {
+            background-color: #d35400;
+            color: white;
+            padding: 7px 8px;
+            text-align: left;
+            font-size: 10px;
+        }
+
+        td {
+            border: 1px solid #e0b890;
+            padding: 6px 8px;
+            font-size: 10px;
+        }
+
+        tr:nth-child(even) { background-color: #fdf6ed; }
+
+        .firmas {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-around;
+            background-color: rgba(255, 255, 255, 0.92);
+            padding: 15px;
+        }
+
+        .firma { text-align: center; width: 40%; }
+        .firma .linea { border-top: 1px solid #333; margin-bottom: 5px; }
+        .firma p { font-size: 10px; margin: 0; }
+
+        .lema {
+            text-align: center;
+            font-style: italic;
+            font-size: 9px;
+            color: #888;
+            margin-top: 25px;
+            background-color: rgba(255, 255, 255, 0.92);
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <img class="fondo" src="{{HOJA_MEMBRETADA_PATH}}" alt="Hoja membretada">
+
+    <div class="contenido">
+        <div class="titulo-doc">Reporte Consolidado de Operaciones</div>
+
+        <div class="resumen">
+            <p><strong>Período:</strong> {{PERIODO}}</p>
+            <p><strong>Total de reportes:</strong> {{TOTAL}}</p>
+            <p><strong>Emitido:</strong> {{FECHA_EMISION}}</p>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Tipo</th>
+                    <th>Unidad</th>
+                    <th>Operador</th>
+                    <th>Hora Inicio</th>
+                    <th>Hora Fin</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{FILAS}}
+            </tbody>
+        </table>
+
+        <div class="firmas">
+            <div class="firma">
+                <div class="linea"></div>
+                <p><strong>Supervisor de Operaciones</strong></p>
+            </div>
+            <div class="firma">
+                <div class="linea"></div>
+                <p><strong>Director de Protección Civil</strong></p>
+            </div>
+        </div>
+
+        <div class="lema">{{INSTITUCION_LEMA}}</div>
+    </div>
+</body>
+</html>
